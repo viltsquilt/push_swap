@@ -1,26 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_swap.h                                        :+:      :+:    :+:   */
+/*   ps_commands.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/05/29 14:54:10 by vahdekiv         ###   ########.fr       */
+/*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
+/*   Updated: 2025/05/29 17:10:56 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP_H
-# define PUSH_SWAP_H
+#include "push_swap.h"
 
-# include <stdlib.h>
-# include <unistd.h>
-# include "libft/libft.h"
-
-typedef struct	s_stack
+void	push(t_stack *src, t_stack *dest)
 {
-	int		*list;
-	size_t	size;
-}	t_stack;
+	int	i;
 
-#endif
+	i = 0;
+
+}
+
+void	swap(t_stack *src, t_stack *dest)
+{
+
+}
+
+void	rotate(t_stack *src, t_stack *dest)
+{
+
+}
+
+void	reverse_rotate(t_stack *src, t_stack *dest)
+{
+
+}

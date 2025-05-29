@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/05/28 16:20:43 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/05/29 15:57:49 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,19 @@ int	ps_atol(char *nptr)
 	if (nptr[i] < '0' || nptr[i] > '9' || nb > INT_MAX || nb <= INT_MIN)
 		return (0);
 	return (nb);
+}
+
+int listlen(int *list)
+{
+    int i;
+
+    i = 0;
+    while (list[i])
+        i++;
+    return (i);
+}
+
+int	get_index(t_stack a)
+{
+	
 }
