@@ -6,13 +6,13 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/05/29 17:03:33 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/04 16:58:27 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int	arraylen(char **split)
+static int	ps_arraylen(char **split)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ static int	arraylen(char **split)
 	return (i);
 }
 
-void	ps_free(char **array)
+static void	ps_free(char **array)
 {
 	int	i;
 
@@ -32,7 +32,7 @@ void	ps_free(char **array)
 		free(array[i]);
 		i++;
 	}
-	array[i] = NULL;
+	free(array);
 }
 
 static int	ps_isduplicate(int *array, int num)
@@ -51,10 +51,8 @@ static int	ps_isduplicate(int *array, int num)
 
 int	main(int argc, char **argv)
 {
-	t_stack			a;
-	t_stack			b;
+	t_stack			stacks;
 	int				i;
-	int			*temp;
 	char	**split;
 
 	i = 0;
@@ -64,8 +62,21 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	split = ft_split(&argv[1], " ");
-	temp = malloc(ps_arraylen(split) + 1) * (sizeof(int));
-	if (!temp)
+	if (!split)
+	{
+		write(1, "Error\n", 6);
+		return (1);
+	}
+	stacks->size_a = ps_arraylen(split);
+	stacks->list_a = malloc((stacks->size_a) * (sizeof(int)));
+	if (!stacks->list_a)
+	{
+		write(1, "Error\n", 6);
+		ps_free(split);
+		return (1);
+	}
+	stacks->list_b = malloc((stacks->size_a) * (sizeof(int)));
+	if (!stacks->list_b)
 	{
 		write(1, "Error\n", 6);
 		ps_free(split);
@@ -73,30 +84,23 @@ int	main(int argc, char **argv)
 	}
 	while (split++)
 	{
-		temp[i] = ps_atol(*split);
-		free(*split);
-		if ((!temp) || (ps_isduplicate(temp, temp[i]) == 1))
+		stacks->list_a[i] = ps_atol(split);
+		if ((!stacks->list_a) || 
+			(ps_isduplicate(stacks->list_a, stacks->list_a[i]) == 1))
 			{
 				write(1, "Error\n", 6);
-				free(temp);
-				free(split);
+				ps_free(stacks->list_a);
+				ps_free(split);
 				return (1);
 			}
 		i++;
 	}
-	a->size = ps_listlen(list);
-	a->list = malloc(size) * (sizeof(int));
-	if (!list)
-	{
-		write(1, "Error\n", 6);
-		free(temp);
-		return (1);
-	}
-	i = 0;
-	while (temp[i])
-		a->list[i] = temp[i];
-	free(temp)
-	array_type(&a);
-	free(list);
+	ps_free(split)
+	if (stacks->size_a == 3)
+		small_sort(stacks);
+	else
+		push_swap(stacks);
+	free(stacks->list_a);
+	free(stacks->list_b);
 	return (0);
 }
