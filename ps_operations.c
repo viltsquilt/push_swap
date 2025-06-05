@@ -6,30 +6,59 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/04 16:45:24 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/05 15:59:57 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack *src, t_stack *dest)
+void	push_operation(t_stack *stacks, int type)
 {
 	int	i;
+	int	*src;
+	int	*dest;
 
 	i = 0;
-
+	if (type == 1)
+	{
+		src = stacks->list_a[i];
+		dest = stacks->list_b[i];
+		reverse_rotate(stacks, 2);
+		*dest = *src;
+		reverse_rotate(stacks, type);
+	}
+	else if (type == 2)
+	{
+		src = staks->list_b[i];
+		dest = stacks->ist_a[i];
+		reverse_rotate(stacks, 1);
+		*dest = *src;
+		reverse_rotate(stacks, type);
+	}
 }
 
-void	swap(t_stack *src, t_stack *dest)
+void	swap_operation(t_stack *stacks, int type)
 {
 	int	temp;
+	int	*src;
+	int	*dest;
 
+	if (type == 1)
+	{
+		src = stacks->list_a[i];
+		dest = stacks->list_a[i + 1];
+	}
+	else if (type == 2)
+	{
+		src = stacks->list_b[i];
+		dest = stacks->list_b[i + 1];
+	}
 	temp = *src;
 	*src = *dest;
 	*dest = temp;
 }
 
-void	rotate(t_stack *stacks, int type)
+void	rotate_operation(t_stack *stacks, int type)
 {
 	int	temp;
 	int	i;
@@ -49,7 +78,7 @@ void	rotate(t_stack *stacks, int type)
 	array[i] = temp;
 }
 
-void	reverse_rotate(t_stack *stacks, int type)
+void	reverse_rotate_operation(t_stack *stacks, int type)
 {
 	int	temp;
 	size_t	len;
