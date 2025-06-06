@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/04 16:58:27 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:19:47 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,20 +17,20 @@ static int	ps_arraylen(char **split)
 	int	i;
 
 	i = 0;
-	while (split++)
+	while (*split++)
 		i++;
 	return (i);
 }
 
 static void	ps_free(char **array)
 {
-	int	i;
+	int	j;
 
-	i = 0;
-	while(array[i])
+	j = 0;
+	while(array[j])
 	{
-		free(array[i]);
-		i++;
+		free(array[j]);
+		j++;
 	}
 	free(array);
 }
@@ -53,54 +53,62 @@ int	main(int argc, char **argv)
 {
 	t_stack			stacks;
 	int				i;
-	char	**split;
+	int				j;
+	int				temp;
+	char			**split;
 
 	i = 0;
+	j = 0;
 	if (argc < 2 || argc > 2)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
-	split = ft_split(&argv[1], " ");
+	split = ft_split(argv[1], ' ');
 	if (!split)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		return (1);
 	}
-	stacks->size_a = ps_arraylen(split);
-	stacks->list_a = malloc((stacks->size_a) * (sizeof(int)));
-	if (!stacks->list_a)
+	stacks.size_a = ps_arraylen(split);
+	j = stacks.size_a - 1;
+	stacks.list_a = malloc((stacks.size_a) * (sizeof(int)));
+	if (!stacks.list_a)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		ps_free(split);
 		return (1);
 	}
-	stacks->list_b = malloc((stacks->size_a) * (sizeof(int)));
-	if (!stacks->list_b)
+	stacks.list_b = malloc((stacks.size_a) * (sizeof(int)));
+	if (!stacks.list_b)
 	{
-		write(1, "Error\n", 6);
+		write(2, "Error\n", 6);
 		ps_free(split);
 		return (1);
 	}
-	while (split++)
+	while (split[i] != 0)
 	{
-		stacks->list_a[i] = ps_atol(split);
-		if ((!stacks->list_a) || 
-			(ps_isduplicate(stacks->list_a, stacks->list_a[i]) == 1))
+		temp  = ps_atol(split[i]);
+		if ((!stacks.list_a) || 
+			(ps_isduplicate(stacks.list_a, temp) == 1))
 			{
-				write(1, "Error\n", 6);
-				ps_free(stacks->list_a);
+				write(2, "Error\n", 6);
+				free(stacks.list_a);
 				ps_free(split);
 				return (1);
 			}
+			
+		stacks.list_a[i] = temp;
+		j++;
 		i++;
 	}
-	ps_free(split)
-	if (stacks->size_a == 3)
+	ps_free(split);
+	if (stacks.size_a == 3)
 		small_sort(stacks);
 	else
-		push_swap(stacks);
-	free(stacks->list_a);
-	free(stacks->list_b);
+//		push_swap(stacks);
+		ft_printf("%i %i %i %i\n", stacks.list_a[0], stacks.list_a[1], stacks.list_a[2], stacks.list_a[3]);
+	free(stacks.list_a);
+	free(stacks.list_b);
 	return (0);
 }

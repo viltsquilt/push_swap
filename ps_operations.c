@@ -6,13 +6,13 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/05 15:59:57 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/06 14:27:32 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_operation(t_stack *stacks, int type)
+void	push_operation(t_stack stacks, int type)
 {
 	int	i;
 	int	*src;
@@ -21,44 +21,46 @@ void	push_operation(t_stack *stacks, int type)
 	i = 0;
 	if (type == 1)
 	{
-		src = stacks->list_a[i];
-		dest = stacks->list_b[i];
-		reverse_rotate(stacks, 2);
+		src = &stacks.list_a[i];
+		dest = &stacks.list_b[i];
+		reverse_rotate_operation(stacks, 2);
 		*dest = *src;
-		reverse_rotate(stacks, type);
+		reverse_rotate_operation(stacks, type);
 	}
-	else if (type == 2)
+	else
 	{
-		src = staks->list_b[i];
-		dest = stacks->ist_a[i];
-		reverse_rotate(stacks, 1);
+		src = &stacks.list_b[i];
+		dest = &stacks.list_a[i];
+		reverse_rotate_operation(stacks, 1);
 		*dest = *src;
-		reverse_rotate(stacks, type);
+		reverse_rotate_operation(stacks, type);
 	}
 }
 
-void	swap_operation(t_stack *stacks, int type)
+void	swap_operation(t_stack stacks, int type)
 {
 	int	temp;
 	int	*src;
 	int	*dest;
+	int	i;
 
+	i = 0;
 	if (type == 1)
 	{
-		src = stacks->list_a[i];
-		dest = stacks->list_a[i + 1];
+		src = &stacks.list_a[i];
+		dest = &stacks.list_a[i + 1];
 	}
-	else if (type == 2)
+	else
 	{
-		src = stacks->list_b[i];
-		dest = stacks->list_b[i + 1];
+		src = &stacks.list_b[i];
+		dest = &stacks.list_b[i + 1];
 	}
 	temp = *src;
 	*src = *dest;
 	*dest = temp;
 }
 
-void	rotate_operation(t_stack *stacks, int type)
+void	rotate_operation(t_stack stacks, int type)
 {
 	int	temp;
 	int	i;
@@ -66,9 +68,9 @@ void	rotate_operation(t_stack *stacks, int type)
 
 	i = 0;
 	if (type == 1)
-		array = stacks->list_a;
-	else if (type == 2)
-		array = stacks->list_b;
+		array = stacks.list_a;
+	else
+		array = stacks.list_b;
 	temp = array[i];
 	while (array[i + 1])
 	{
@@ -78,7 +80,7 @@ void	rotate_operation(t_stack *stacks, int type)
 	array[i] = temp;
 }
 
-void	reverse_rotate_operation(t_stack *stacks, int type)
+void	reverse_rotate_operation(t_stack stacks, int type)
 {
 	int	temp;
 	size_t	len;
@@ -86,13 +88,13 @@ void	reverse_rotate_operation(t_stack *stacks, int type)
 
 	if (type == 1)
 	{
-		len = stacks->size_a;
-		array = stacks->list_a;
+		len = stacks.size_a;
+		array = stacks.list_a;
 	}
-	else if (type == 2)
+	else
 	{
-		len = stacks->size_b;
-		array = stacks->list_b;
+		len = stacks.size_b;
+		array = stacks.list_b;
 	}
 	temp = array[len];
 	while (array[len - 1] >= 0)

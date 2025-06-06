@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/04 16:09:07 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/06 15:28:19 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,9 @@ int	ps_atol(char *nptr)
 		i++;
 	}
 	nb *= minusflag;
-	if (nptr[i] < '0' || nptr[i] > '9' || nb > INT_MAX || nb <= INT_MIN)
-		return (0);
+	if (nptr[i] == '\0')
+		return (nb);
+//	if (nb > INT_MAX || nb <= INT_MIN)
+//		exit (1);
 	return (nb);
 }
