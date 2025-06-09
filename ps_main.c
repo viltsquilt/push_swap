@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/06 15:19:47 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/09 16:22:00 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,12 +53,10 @@ int	main(int argc, char **argv)
 {
 	t_stack			stacks;
 	int				i;
-	int				j;
 	int				temp;
 	char			**split;
 
 	i = 0;
-	j = 0;
 	if (argc < 2 || argc > 2)
 	{
 		write(2, "Error\n", 6);
@@ -71,7 +69,6 @@ int	main(int argc, char **argv)
 		return (1);
 	}
 	stacks.size_a = ps_arraylen(split);
-	j = stacks.size_a - 1;
 	stacks.list_a = malloc((stacks.size_a) * (sizeof(int)));
 	if (!stacks.list_a)
 	{
@@ -99,15 +96,14 @@ int	main(int argc, char **argv)
 			}
 			
 		stacks.list_a[i] = temp;
-		j++;
 		i++;
 	}
 	ps_free(split);
 	if (stacks.size_a == 3)
 		small_sort(stacks);
-	else
+//	else
 //		push_swap(stacks);
-		ft_printf("%i %i %i %i\n", stacks.list_a[0], stacks.list_a[1], stacks.list_a[2], stacks.list_a[3]);
+//		ft_printf("%i %i %i %i\n", stacks.list_a[0], stacks.list_a[1], stacks.list_a[2], stacks.list_a[3]);
 	free(stacks.list_a);
 	free(stacks.list_b);
 	return (0);

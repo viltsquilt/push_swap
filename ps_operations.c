@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/06 14:27:32 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/09 15:49:39 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,7 @@ void	reverse_rotate_operation(t_stack stacks, int type)
 		array = stacks.list_b;
 	}
 	temp = array[len];
-	while (array[len - 1] >= 0)
+	while (array[len - 1] > 0)
 	{
 		array[len] = array[len - 1];
 		len--;
