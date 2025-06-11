@@ -6,59 +6,43 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/09 18:41:20 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/11 15:41:26 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-// write the algorithm
 
-void	push_swap(t_stack *stacks)
+void	push_swap(t_stack stacks)
 {
+	int	a_index;
+	int	b_index;
 	int	i;
-	int	j;
-	int	k;
-	int	temp;
-	int	*pairs_b;
 
 	i = 0;
-	k = 0;
-	temp = 0;
-//	push every variable to stack b until there are ony 3 variables left in stack a
-	while(stack.size_a > 3)
+	
+	while(stacks.size_a > 3) // push b until only 3 nodes left in stack a
 		push(stacks, 'b');
-
-//	sort the three numbers in stack a
-	small_sort(stacks);
-
-/*	find the "smallest bigger" in stack a for each number in stack b
-	if the number in stack b is bigger than all numbers in stack a, we push it on
-	top of the smallest number in stack a*/
-	while(stack.list_b[i])
+	small_sort(stacks); // sort the three numbers left in stack a
+	while (stacks.list_b[b_index])
 	{
-		j = 0;
-		while(stack.list_a[j])
-		{
-			if(stack.list_a[i] < stack.list_b[j])
-				j++;
-			else
-			{
-				pairs_b[k] = stack.list_a[j];
-				j++;
-				if (stack.list_a[j] > pairs_b[k])
-					j++;
-				else if ((stack.list_a[j] < pairs_b[k]) && (stack.list_a[j] > stack.list_b[i]))
-					pairs_b[k] = stack.list_b[j];
-			}
-			j++;
-
-		}
-		k++;
-		i++;
+		target = find_targets(stacks, stacks.list_b[b_index]); // We want to find smallest bigger in stack a for stack b
+		// find index for target in stack a
+		index_a = find_index(stacks, target, 1);
+		index_b = find_index(stacks, stacks.list_b, 2);
+		// calculate and store costs for moving pairs to top
 	}
-//	Calculate "bring to top cost" for every node in stack a and b
+	smallest_a = find_smallest(stacks); // We want to find the smallest node in stack a
+	biggest_a = find_biggest(stacks, 1);
+	biggest_b = find_biggest(stacks, 2);
+	if (biggest_a < biggest_b) // If biggest node is in stack b, we want to save it to push it on top of smallest a later
+	{
+		while (targets[i])
+			i++;
+		targets[i] = smallest_a; // Targets now has all of our "target nodes"
+	}
 
-//	To use rotate or reverse rotate to bring to top: number of nodes / 2
+//	Calculate "bring to top cost" for every node in stack a and b
+	
 //	if the index is in the first half (index <= nodes / 2) we use rotate,
 //	otherwise we use reverse rotate
 

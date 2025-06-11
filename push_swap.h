@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/06 14:29:28 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/11 13:19:13 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,12 @@
 
 typedef struct	s_stack
 {
-	int		*list_a;
-	int		*list_b;
+	int			*list_a;
+	int			*list_b;
+	int			smallest_a;
+	int			biggest_a;
+	int			biggest_b;
+	int			*targets;
 	size_t		size_a;
 	size_t		size_b;
 }	t_stack;
