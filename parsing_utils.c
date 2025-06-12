@@ -1,0 +1,62 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing_utils.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
+/*   Updated: 2025/06/12 16:30:35 by vahdekiv         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "push_swap.h"
+#include <limits.h>
+
+int	ps_atol(char *nptr)
+{
+	int	i;
+	int	minusflag;
+	long	nb;
+
+	i = 0;
+	minusflag = 1;
+	nb = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			minusflag = -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		nb = nb * 10 + (nptr[i] - '0');
+		i++;
+	}
+	nb *= minusflag;
+	if (nptr[i] == '\0')
+		return (nb);
+//	if (nb > INT_MAX || nb <= INT_MIN)
+//		exit (1);
+	return (nb);
+}
+
+int	size(t_stack stacks, int type)
+{
+	int	i;
+
+	i = 0;
+	if (type == 1)
+	{
+		while (stacks.list_a[i])
+			i++;
+	}
+	else
+	{
+		while (stacks.list_b[i])
+			i++;
+	}
+	return (i);
+}

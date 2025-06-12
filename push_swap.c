@@ -6,59 +6,129 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/11 15:41:26 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/12 16:32:38 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(t_stack stacks)
+void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 {
-	int	a_index;
-	int	b_index;
 	int	i;
+	int	j;
 
 	i = 0;
-	
-	while(stacks.size_a > 3) // push b until only 3 nodes left in stack a
+	while(size(stacks, 1) > 3) // push b until only 3 nodes left in stack a
 		push(stacks, 'b');
 	small_sort(stacks); // sort the three numbers left in stack a
-	while (stacks.list_b[b_index])
+	stacks.smallest_a = find_smallest(stacks); // We want to find the smallest node in stack a
+	stacks.biggest_a = find_biggest(stacks, 1);
+	stacks.biggest_b = find_biggest(stacks, 2);
+	while (stacks.list_b[i])
 	{
-		target = find_targets(stacks, stacks.list_b[b_index]); // We want to find smallest bigger in stack a for stack b
-		// find index for target in stack a
-		index_a = find_index(stacks, target, 1);
-		index_b = find_index(stacks, stacks.list_b, 2);
-		// calculate and store costs for moving pairs to top
+		stacks.target = find_target(stacks, stacks.list_b[i]); // We want to find smallest bigger in stack a for stack b
+		stacks.index_a = find_index(stacks, stacks.target, 1);
+		stacks.index_b = find_index(stacks, stacks.list_b[i], 2);
+		stacks.cost_a = calculate_cost(stacks, 1);
+		stacks.cost_b = calculate_cost(stacks, 2);
+		stacks.top_costs[i] = stacks.cost_a + stacks.cost_b; // calculate and store costs for moving pairs to top
+		j = 0;
+		stacks.cheapest = stacks.top_cost[j]; // We reset cheapest every time because we want to compare it to all costs as we calculate them
+		while (stacks.top_cost[j])
+		{
+			j++;
+			if (stacks.cheapest >= stacks.top_cost[j])
+				stacks.cheapest = stacks.top_cost[j]; // We have now found the cheapest pair to move to top
+		}
+		i++;
 	}
-	smallest_a = find_smallest(stacks); // We want to find the smallest node in stack a
-	biggest_a = find_biggest(stacks, 1);
-	biggest_b = find_biggest(stacks, 2);
-	if (biggest_a < biggest_b) // If biggest node is in stack b, we want to save it to push it on top of smallest a later
+	j = 0;
+	if (size(stacks, 2) != 0) //RECURSION?
 	{
-		while (targets[i])
-			i++;
-		targets[i] = smallest_a; // Targets now has all of our "target nodes"
+		while (stacks.top_cost[j])
+		{
+			if (stacks.top cost[j] == stacks.cheapest)
+				break;
+			else
+				j++;
+		}
+		stacks.target = find_target(stacks, stacks.list_b[j]);
+		stacks.index_a = find_index(stacks, stacks.target, 1);
+		stacks.index_b = find_index(stacks, stacks.list_b[j], 2);
+		if (((stacks.cost_a = calculate_cost(stacks, 1) == stacks.index_a) &&
+			(stacks.cost_b = calculate_cost(stacks, 2) == stacks.index_b)) &&
+			(stack.index_a == stack.index_b))
+		{
+			while (stacks.cost_a)
+			{
+				rotate(stacks, 'x'); //rotate both
+				stacks.index_a--;
+			}
+		}
+		else if (((stacks.cost_a != stacks.index_a) &&
+			(stacks.cost_b != stacks.index_b)) &&
+			(stacks.cost_b == stacks.cost_a))
+		{
+			while (stacks.cost_a)
+			{
+				reverse_rotate(stacks, 'x'); //reverse rotate both
+				stacks.cost_b--;
+			}
+		}
+		else if (stacks.cost_a == stacks.index_a)
+		{
+			while (stacks.cost_a)
+			{
+				rotate(stacks, 'a'); //rotate
+				stacks.cost_a--;
+			}
+		}
+		else if (stacks.cost_b == stacks.index_b)
+		{
+			while (stacks.cost_b)
+			{
+				rotate(stacks, 'b'); //rotate
+				stacks.cost_b--;
+			}
+		}
+		else if (stacks.cost_a != stacks.index_a)
+		{
+			while (stacks.cost_a)
+			{
+				reverse_rotate(stacks, 'a'); //reverse rotate
+				stacks.cost_a--;
+			}
+		}
+		else
+		{
+			while (stacks.cost_b)
+			{
+				reverse_rotate(stacks, 'b'); //reverse rotate
+				stacks.cost_b--;
+			}
+		}
+		push(stacks, 'a');
+		push_swap(stacks);
 	}
-
-//	Calculate "bring to top cost" for every node in stack a and b
-	
-//	if the index is in the first half (index <= nodes / 2) we use rotate,
-//	otherwise we use reverse rotate
-
-	if (node index number <= number of nodes / 2)
-		bring to top cost = node index number;
+	stacks.smallest_a = find_smallest(stacks); // Find smallest number in stack a and rorate or reverse rotate to top
+	stacks.index_a = find_index(stacks, stacks.smallest_a, 1);
+	if (stacks.cost_a = calculate_cost(stacks, 1) == stacks.index_a)
+	{
+		while (stacks.cost_a)
+		{
+			rotate(stacks, 'a'); //rotate
+			stacks.cost_a--;
+		}
+	}
 	else
-		bring to top cost = total number of nodes - node index number;
-	
-//	find the "cheapest node" ie. the operation with the lowest total cost to push to stack a
-//	using rotate,reverse rotate, or rotate both
-
-//	repeat
-
-//	Find smallest number in stack a and rotate (or reverse rotate) until it is at the top
-
-//	Sorted
+	{
+		while (stacks.cost_a)
+		{
+			reverse_rotate(stacks, 'a'); //reverse rotate
+			stacks.cost_a--;
+		}
+	}
+//	Check if sorted
 }
 
 void	small_sort(t_stack stacks)
