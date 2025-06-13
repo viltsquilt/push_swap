@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/09 16:22:00 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:14:18 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,11 @@ int	main(int argc, char **argv)
 	ps_free(split);
 	if (stacks.size_a == 3)
 		small_sort(stacks);
-//	else
-//		push_swap(stacks);
-//		ft_printf("%i %i %i %i\n", stacks.list_a[0], stacks.list_a[1], stacks.list_a[2], stacks.list_a[3]);
+	else
+	{
+		push_swap(stacks);
+		ft_printf("%i %i %i %i\n", stacks.list_a[0], stacks.list_a[1], stacks.list_a[2], stacks.list_a[3]);
+	}
 	free(stacks.list_a);
 	free(stacks.list_b);
 	return (0);

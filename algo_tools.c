@@ -6,9 +6,11 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:10:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/12 16:37:51 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/13 12:41:35 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "push_swap.h"
 
 int	calculate_cost(t_stack stacks, int type) // Use flags for r and rr?
 {
@@ -44,7 +46,7 @@ int find_smallest(t_stack stacks)
 	return (smallest);
 }
 
-int find_biggest(t_stack stacks)
+int find_biggest(t_stack stacks, int type)
 {
 	int biggest;
 	int i;
@@ -100,17 +102,20 @@ int find_target(t_stack stacks, int num)
 	int i;
 
 	i = 0;
+	stacks.target = stacks.list_a[i];
 	while(stacks.list_a[i]) // We want to loop through stack a to find the target for the node in stack b
 	{
-		if ((stacks.smallest_a == stacks.list_a[i]) &&
+		i++;
+		if ((stacks.smallest_a == stacks.target) &&
 			(stacks.biggest_a < stacks.biggest_b)) // If biggest node is in stack b, we want to save it to push it on top of smallest a later
-			return (stacks.target = stacks.smallest_a); // Target for smallest node in a is biggest node if in stack b
+			return (stacks.target); // Target for smallest node in a is biggest node if in stack b
 		if (stacks.list_a[i] > num)
+		{
 			stacks.target = stacks.list_a[i]; // We save the first bigger element to temp
-		i++;
-		if ((stacks.list_a[i] < stacks.target) && (stacks.list_a[i] > num)) // Check for smaller bigger and replace if found
-			stacks.target = stacks.list_a[i];
-		i++;
+			if ((stacks.list_a[i++]) && (stacks.list_a[i++] < stacks.target) &&
+				(stacks.list_a[i++] > num)) // Check for smaller bigger and replace if found
+				stacks.target = stacks.list_a[i++];
+		}
 	}
 	return (stacks.target);
 }

@@ -6,20 +6,23 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/12 16:32:38 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/13 13:37:14 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
+void	push_swap(t_stack stacks)
 {
 	int	i;
 	int	j;
 
 	i = 0;
-	while(size(stacks, 1) > 3) // push b until only 3 nodes left in stack a
+	while(stacks.size_a > 3) // push b until only 3 nodes left in stack a
+	{
 		push(stacks, 'b');
+		stacks.size_a = size(stacks, 1);
+	}
 	small_sort(stacks); // sort the three numbers left in stack a
 	stacks.smallest_a = find_smallest(stacks); // We want to find the smallest node in stack a
 	stacks.biggest_a = find_biggest(stacks, 1);
@@ -31,7 +34,7 @@ void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 		stacks.index_b = find_index(stacks, stacks.list_b[i], 2);
 		stacks.cost_a = calculate_cost(stacks, 1);
 		stacks.cost_b = calculate_cost(stacks, 2);
-		stacks.top_costs[i] = stacks.cost_a + stacks.cost_b; // calculate and store costs for moving pairs to top
+		stacks.top_cost[i] = (stacks.cost_a + stacks.cost_b); // calculate and store costs for moving pairs to top
 		j = 0;
 		stacks.cheapest = stacks.top_cost[j]; // We reset cheapest every time because we want to compare it to all costs as we calculate them
 		while (stacks.top_cost[j])
@@ -47,7 +50,7 @@ void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 	{
 		while (stacks.top_cost[j])
 		{
-			if (stacks.top cost[j] == stacks.cheapest)
+			if (stacks.top_cost[j] == stacks.cheapest)
 				break;
 			else
 				j++;
@@ -55,9 +58,11 @@ void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 		stacks.target = find_target(stacks, stacks.list_b[j]);
 		stacks.index_a = find_index(stacks, stacks.target, 1);
 		stacks.index_b = find_index(stacks, stacks.list_b[j], 2);
-		if (((stacks.cost_a = calculate_cost(stacks, 1) == stacks.index_a) &&
-			(stacks.cost_b = calculate_cost(stacks, 2) == stacks.index_b)) &&
-			(stack.index_a == stack.index_b))
+		stacks.cost_a = calculate_cost(stacks, 1);
+		stacks.cost_b = calculate_cost(stacks, 2);
+		if (((stacks.cost_a  == stacks.index_a) &&
+			(stacks.cost_b == stacks.index_b)) &&
+			(stacks.index_a == stacks.index_b))
 		{
 			while (stacks.cost_a)
 			{
@@ -112,7 +117,8 @@ void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 	}
 	stacks.smallest_a = find_smallest(stacks); // Find smallest number in stack a and rorate or reverse rotate to top
 	stacks.index_a = find_index(stacks, stacks.smallest_a, 1);
-	if (stacks.cost_a = calculate_cost(stacks, 1) == stacks.index_a)
+	stacks.cost_a = calculate_cost(stacks, 1);
+	if (stacks.cost_a == stacks.index_a)
 	{
 		while (stacks.cost_a)
 		{
@@ -128,7 +134,6 @@ void	push_swap(t_stack stacks) //CODE FUNCTION FOR ARRAY LENGTH
 			stacks.cost_a--;
 		}
 	}
-//	Check if sorted
 }
 
 void	small_sort(t_stack stacks)
