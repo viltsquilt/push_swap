@@ -6,22 +6,22 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/05 13:57:44 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/09 15:19:58 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:06:17 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	push(t_stack stacks, char c)
+void	push(t_stack stacks, char c, int len_a, int len_b)
 {
 	if (c == 'a')
 	{
-		push_operation(stacks, 1);
+		push_operation(stacks, 1, len_a, len_b);
 		ft_printf("%s\n", "pa");
 	}
 	else if (c == 'b')
 	{
-		push_operation(stacks, 2);
+		push_operation(stacks, 2, len_a, len_b);
 		ft_printf("%s\n", "pb");
 	}
 }
@@ -46,42 +46,42 @@ void	swap(t_stack stacks, char c)
 	}
 }
 
-void	rotate(t_stack stacks, char c)
+void	rotate(t_stack stacks, char c, int len_a, int len_b)
 {
-	if (c == 'a')
+	if (c == 'a' && len_b == 0)
 	{
-		rotate_operation(stacks, 1);
+		rotate_operation(stacks, 1, len_a);
 		ft_printf("%s\n", "ra");
 	}
-	else if (c == 'b')
+	else if (c == 'b' && len_a == 0)
 	{
-		rotate_operation(stacks, 2);
+		rotate_operation(stacks, 2, len_b);
 		ft_printf("%s\n", "rb");
 	}
 	else if (c == 'x')
 	{
-		rotate_operation(stacks, 1);
-		rotate_operation(stacks, 2);
+		rotate_operation(stacks, 1, len_a);
+		rotate_operation(stacks, 2, len_b);
 		ft_printf("%s\n", "rr");
 	}
 }
 
-void	reverse_rotate(t_stack stacks, char c)
+void	reverse_rotate(t_stack stacks, char c, int len_a, int len_b)
 {
-	if (c == 'a')
+	if (c == 'a' && len_b == 0)
 	{
-		reverse_rotate_operation(stacks, 1);
+		reverse_rotate_operation(stacks, 1, len_a);
 		ft_printf("%s\n", "rra");
 	}
-	else if (c == 'b')
+	else if (c == 'b' && len_a == 0)
 	{
-		reverse_rotate_operation(stacks, 2);
+		reverse_rotate_operation(stacks, 2, len_b);
 		ft_printf("%s\n", "rrb");
 	}
 	else if (c == 'x')
 	{
-		reverse_rotate_operation(stacks, 1);
-		reverse_rotate_operation(stacks, 2);
+		reverse_rotate_operation(stacks, 1, len_a);
+		reverse_rotate_operation(stacks, 2, len_b);
 		ft_printf("%s\n", "rrr");
 	}
 }

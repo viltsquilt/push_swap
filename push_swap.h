@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/13 11:32:06 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/16 15:16:54 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,25 +33,27 @@ typedef struct	s_stack
 	int			*top_cost;
 	size_t		size_a;
 	size_t		size_b;
+	int			len_a;
+	int			len_b;
 }	t_stack;
 
 int		main(int argc, char **argv);
 int     ps_atol(char *nptr);
-int		calculate_cost(t_stack stacks, int type);
-int		find_smallest(t_stack stacks);
-int		find_biggest(t_stack stacks, int type);
-int		find_index(t_stack stacks, int num, int type);
-int		find_target(t_stack stacks, int num);
+int		calculate_cost(t_stack stacks, int type, int len);
+int		find_smallest(t_stack stacks, int len);
+int		find_biggest(t_stack stacks, int type, int len);
+int		find_index(t_stack stacks, int num, int type, int len);
+int		find_target(t_stack stacks, int num, int len);
 int		size(t_stack stacks, int type);
-void	small_sort(t_stack stacks);
-void	push_swap(t_stack stacks);
-void	push(t_stack stacks, char c);
+void	small_sort(t_stack stacks, int len_a, int len_b);
+void	push_swap(t_stack stacks, int len_a, int len_b);
+void	push(t_stack stacks, char c, int len_a, int len_b);
 void	swap(t_stack stacks, char c);
-void	rotate(t_stack stacks, char c);
-void	reverse_rotate(t_stack stacks, char c);
-void	push_operation(t_stack stacks, int type);
+void	rotate(t_stack stacks, char c, int len_a, int len_b);
+void	reverse_rotate(t_stack stacks, char c, int len_a, int len_b);
+void	push_operation(t_stack stacks, int type, int len_a, int len_b);
 void	swap_operation(t_stack stacks, int type);
-void	rotate_operation(t_stack stacks, int type);
-void	reverse_rotate_operation(t_stack stacks, int type);
+void	rotate_operation(t_stack stacks, int type, int len);
+void	reverse_rotate_operation(t_stack stacks, int type, int len);
 
 #endif

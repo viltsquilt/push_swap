@@ -6,38 +6,38 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:10:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/13 12:41:35 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/16 17:20:28 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	calculate_cost(t_stack stacks, int type) // Use flags for r and rr?
+int	calculate_cost(t_stack stacks, int type, int len) // Use flags for r and rr?
 {
 	if (type == 1)
 	{
-		if (stacks.index_a <= size(stacks, 1) / 2) //Rotate
+		if (stacks.index_a <= (len / 2)) //Rotate
 			return (stacks.index_a);
 		else
-			return (size(stacks, 1) - stacks.index_a); //Reverse rotate
+			return (len - stacks.index_a); //Reverse rotate
 	}
 	else
 	{
-		if (stacks.index_b <= size(stacks, 2) / 2) //Rotate
+		if (stacks.index_b <= (len / 2)) //Rotate
 			return (stacks.index_b);
 		else
-			return (size(stacks, 2) - stacks.index_b); //Reverse rotate
+			return (len - stacks.index_b); //Reverse rotate
 	}
 }
 
-int find_smallest(t_stack stacks)
+int find_smallest(t_stack stacks, int len)
 {
 	int smallest;
 	int i;
 
 	i = 0;
 	smallest = stacks.list_a[i];
-	while (stacks.list_a[i])
+	while (i < (len - 1))
 	{
 		i++;
 		if (smallest > stacks.list_a[i])
@@ -46,7 +46,7 @@ int find_smallest(t_stack stacks)
 	return (smallest);
 }
 
-int find_biggest(t_stack stacks, int type)
+int find_biggest(t_stack stacks, int type, int len)
 {
 	int biggest;
 	int i;
@@ -55,7 +55,7 @@ int find_biggest(t_stack stacks, int type)
 	if (type == 1)
 	{
 		biggest = stacks.list_a[i];
-		while (stacks.list_a[i])
+		while (stacks.list_a[i] < len)
 		{
 			i++;
 			if (biggest < stacks.list_a[i])
@@ -65,7 +65,7 @@ int find_biggest(t_stack stacks, int type)
 	else
 	{
 		biggest = stacks.list_b[i];
-		while (stacks.list_b[i])
+		while (stacks.list_b[i] < len)
 		{
 			i++;
 			if (biggest < stacks.list_b[i])
@@ -75,20 +75,20 @@ int find_biggest(t_stack stacks, int type)
 	return (biggest);
 }
 
-int find_index(t_stack stacks, int num, int type)
+int find_index(t_stack stacks, int num, int type, int len)
 {
 	int i;
 
 	i = 0;
 	if (type == 1)
-		while (stacks.list_a[i])
+		while (i < len)
 		{
 			if (stacks.list_a[i] == num)
 				return (i);
 			i++;
 		}
 	else
-		while (stacks.list_b[i])
+		while (i < len)
 		{
 			if (stacks.list_b[i] == num)
 				return (i);
@@ -97,13 +97,13 @@ int find_index(t_stack stacks, int num, int type)
 	return (i);
 }
 
-int find_target(t_stack stacks, int num)
+int find_target(t_stack stacks, int num, int len)
 {
 	int i;
 
 	i = 0;
 	stacks.target = stacks.list_a[i];
-	while(stacks.list_a[i]) // We want to loop through stack a to find the target for the node in stack b
+	while(i < len) // We want to loop through stack a to find the target for the node in stack b
 	{
 		i++;
 		if ((stacks.smallest_a == stacks.target) &&
