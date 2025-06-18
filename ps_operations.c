@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/16 18:16:20 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/18 11:32:00 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	push_operation(t_stack stacks, int type, int len_a, int len_b)
 		reverse_rotate_operation(stacks, 2, len_b);
 		stacks.list_b[i] = temp;
 		rotate_operation(stacks, 1, len_a);
-		len_a--;
+//		len_a--;
 	}
 	else
 	{
@@ -32,7 +32,7 @@ void	push_operation(t_stack stacks, int type, int len_a, int len_b)
 		reverse_rotate_operation(stacks, 1, len_a);
 		stacks.list_a[i] = temp;
 		rotate_operation(stacks, 2, len_b);
-		len_b--;
+//		len_b--;
 	}
 }
 

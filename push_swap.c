@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/16 18:25:38 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/18 14:36:28 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,36 +29,52 @@ void	push_swap(t_stack stacks, int len_a, int len_b)
 	stacks.biggest_a = find_biggest(stacks, 1, len_a);
 	stacks.biggest_b = find_biggest(stacks, 2, len_b);
 	stacks.top_cost = malloc((len_b) * sizeof(int));
+	if (!stacks.top_cost)
+	{
+		free(stacks.list_a);
+		free(stacks.list_b);
+		return ;
+	}
+	stacks.cheapest = malloc((len_b) * sizeof(int));
+	if (!stacks.cheapest)
+	{
+		free(stacks.list_a);
+		free(stacks.list_b);
+		return ;
+	}
 	while (i < len_b)
 	{
-		stacks.target = find_target(stacks, stacks.list_b[i], len_a); // We want to find smallest bigger in stack a for stack b
+		stacks.target = find_target(stacks, stacks.list_b[i], len_a, len_b); // We want to find smallest bigger in stack a for stack b
 		stacks.index_a = find_index(stacks, stacks.target, 1, len_a);
 		stacks.index_b = find_index(stacks, stacks.list_b[i], 2, len_b);
 		stacks.cost_a = calculate_cost(stacks, 1, len_a);
 		stacks.cost_b = calculate_cost(stacks, 2, len_b);
 		stacks.top_cost[i] = (stacks.cost_a + stacks.cost_b); // calculate and store costs for moving pairs to top
-		j = 0;
-		stacks.cheapest = stacks.top_cost[j]; // We reset cheapest every time because we want to compare it to all costs as we calculate them
+//		j = 0;
+//		stacks.cheapest = stacks.top_cost[j]; // We reset cheapest every time because we want to compare it to all costs as we calculate them
 //		while (stacks.top_cost[j])
-		while (j <= i)
-		{
-			j++;
-			if (stacks.cheapest >= stacks.top_cost[j])
-				stacks.cheapest = stacks.top_cost[j]; // We have now found the cheapest pair to move to top
-		}
+//		while ((stacks.top_cost[j]) && (j <= i))
+//		{
+//			j++;
+//			if (stacks.cheapest >= stacks.top_cost[j])
+//				stacks.cheapest = stacks.top_cost[j]; // We have now found the cheapest pair to move to top
+//			j++;
+//		}
 		i++;
 	}
 	j = 0;
+	i = 0;
+	stacks.cheapest = sort_cheapest(stacks, len_b); //FIGURE OUT THIS LOOP
 	while (len_b != 0)
 	{
 		while (stacks.top_cost[j])
 		{
-			if (stacks.top_cost[j] == stacks.cheapest)
+			if (stacks.top_cost[j] == stacks.cheapest[i])
 				break;
 			else
 				j++;
 		}
-		stacks.target = find_target(stacks, stacks.list_b[j], len_a);
+		stacks.target = find_target(stacks, stacks.list_b[j], len_a, len_b);
 		stacks.index_a = find_index(stacks, stacks.target, 1, len_a);
 		stacks.index_b = find_index(stacks, stacks.list_b[j], 2, len_b);
 		stacks.cost_a = calculate_cost(stacks, 1, len_a);
@@ -118,8 +134,11 @@ void	push_swap(t_stack stacks, int len_a, int len_b)
 		len_a++;
 		push(stacks, 'a', len_a, len_b);
 		len_b--;
+		i++;
+		j++;
 	}
 	free(stacks.top_cost);
+	free(stacks.cheapest);
 	stacks.smallest_a = find_smallest(stacks, len_a); // Find smallest number in stack a and rorate or reverse rotate to top
 	stacks.index_a = find_index(stacks, stacks.smallest_a, 1, len_a);
 	stacks.cost_a = calculate_cost(stacks, 1, len_a);
@@ -161,9 +180,13 @@ void	small_sort(t_stack stacks, int len_a, int len_b)
 		swap(stacks, 'a');
 	else if ((first < second) && (second > third))
 	{
+		len_b++;
 		push(stacks, 'b', len_a, len_b);
+		len_a--;
 		swap(stacks, 'a');
+		len_a++;
 		push(stacks, 'a', len_a, len_b);
+		len_b--;
 	}
 	else if ((first > second) && (second < third))
 		swap(stacks, 'a');
