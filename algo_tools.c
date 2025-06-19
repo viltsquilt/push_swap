@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:10:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/18 12:06:47 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/19 15:19:37 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,12 +116,13 @@ int find_target(t_stack stacks, int num, int len_a, int len_b)
 //			return (stacks.target); // Target for smallest node in a is biggest node if in stack b
 		if ((stacks.biggest_a < stacks.biggest_b) && (stacks.biggest_b == num))
 			return (stacks.smallest_a);
-		if (stacks.list_a[i] > num)
+		if ((stacks.list_a[i] > num) && (stacks.list_a[i] < stacks.target))
 		{
-			stacks.target = stacks.list_a[i]; // We save the first bigger element to temp
-			if ((stacks.list_a[i++]) && (stacks.list_a[i++] < stacks.target) &&
-				(stacks.list_a[i++] > num)) // Check for smaller bigger and replace if found
-				stacks.target = stacks.list_a[i++];
+			stacks.target = stacks.list_a[i];
+//			stacks.target = stacks.list_a[i]; // We save the first bigger element to temp
+//			if ((stacks.list_a[i++]) && (stacks.list_a[i++] < stacks.target) &&
+//				(stacks.list_a[i++] > num)) // Check for smaller bigger and replace if found
+//				stacks.target = stacks.list_a[i++];
 		}
 	}
 	return (stacks.target);

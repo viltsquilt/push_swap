@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/18 14:36:41 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/19 13:29:12 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,14 @@ typedef struct	s_stack
 	int			smallest_a;
 	int			biggest_a;
 	int			biggest_b;
-	int			*cheapest;
+	int			cheapest;
 	int			target;
 	int			index_a;
 	int			index_b;
 	int			cost_a;
 	int			cost_b;
 	int			*top_cost;
+	int			total;
 	size_t		size_a;
 	size_t		size_b;
 	int			len_a;
@@ -45,7 +46,8 @@ int		find_biggest(t_stack stacks, int type, int len);
 int		find_index(t_stack stacks, int num, int type, int len);
 int		find_target(t_stack stacks, int num, int len_a, int len_b);
 int		size(t_stack stacks, int type);
-int		*sort_cheapest(t_stack stacks, int len_b);
+int		*move_to_top_costs(t_stack stacks, int len_a, int len_b);
+int		find_cheapest(t_stack stacks, int len);
 void	small_sort(t_stack stacks, int len_a, int len_b);
 void	push_swap(t_stack stacks, int len_a, int len_b);
 void	push(t_stack stacks, char c, int len_a, int len_b);
