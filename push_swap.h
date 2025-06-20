@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/19 13:29:12 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/20 14:50:43 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,9 @@ int		find_target(t_stack stacks, int num, int len_a, int len_b);
 int		size(t_stack stacks, int type);
 int		*move_to_top_costs(t_stack stacks, int len_a, int len_b);
 int		find_cheapest(t_stack stacks, int len);
+int		check_isduplicate(int *array, int num);
+void	ps_free(char **array);
+int		multi_input(int ac, char **av);
 void	small_sort(t_stack stacks, int len_a, int len_b);
 void	push_swap(t_stack stacks, int len_a, int len_b);
 void	push(t_stack stacks, char c, int len_a, int len_b);

@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/12 12:10:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/19 15:19:37 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/20 16:57:42 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int find_target(t_stack stacks, int num, int len_a, int len_b)
 	stacks.biggest_a = find_biggest(stacks, 1, len_a);
 	stacks.biggest_b = find_biggest(stacks, 2, len_b);
 	stacks.target = stacks.list_a[i];
-	while(i < len_a) // We want to loop through stack a to find the target for the node in stack b
+	while(i < (len_a - 1)) // We want to loop through stack a to find the target for the node in stack b
 	{
 		i++;
 //		if ((stacks.smallest_a == stacks.target) &&
@@ -116,7 +116,9 @@ int find_target(t_stack stacks, int num, int len_a, int len_b)
 //			return (stacks.target); // Target for smallest node in a is biggest node if in stack b
 		if ((stacks.biggest_a < stacks.biggest_b) && (stacks.biggest_b == num))
 			return (stacks.smallest_a);
-		if ((stacks.list_a[i] > num) && (stacks.list_a[i] < stacks.target))
+		if (((stacks.list_a[i] > num) && 
+			(stacks.list_a[i] < stacks.target) && (stacks.target > num))
+			|| (stacks.target < num))
 		{
 			stacks.target = stacks.list_a[i];
 //			stacks.target = stacks.list_a[i]; // We save the first bigger element to temp
