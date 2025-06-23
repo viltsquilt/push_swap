@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/20 16:56:01 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:19:34 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	push_swap(t_stack stacks, int len_a, int len_b)
 		push(stacks, 'b', len_a, len_b);
 		len_a--;
 	}
-	small_sort(stacks, len_a, len_b); // sort the three numbers left in stack a
+	small_sort(stacks, len_a); // sort the three numbers left in stack a
 	stacks.top_cost = malloc((len_b) * sizeof(int));
 	if (!stacks.top_cost)
 	{
@@ -45,11 +45,6 @@ void	push_swap(t_stack stacks, int len_a, int len_b)
 		stacks.cost_a = calculate_cost(stacks, 1, len_a);
 		stacks.cost_b = calculate_cost(stacks, 2, len_b);
 		stacks.total = (stacks.cost_a + stacks.cost_b);
-//		if (((stacks.target < stacks.list_b[j]) &&
-//			(stacks.target != stacks.smallest_a)) ||
-//			((stacks.biggest_b != stacks.list_b[j]) &&
-//			(stacks.biggest_a < stacks.list_b[j])))
-//			stacks.total = 10000;
 		if (stacks.total == stacks.cheapest)
 		{
 			if (((stacks.cost_a  == stacks.index_a) &&
@@ -158,7 +153,7 @@ void	push_swap(t_stack stacks, int len_a, int len_b)
 		}
 	}
 }
-void	small_sort(t_stack stacks, int len_a, int len_b)
+void	small_sort(t_stack stacks, int len_a)
 {
 	int	first;
 	int	second;
@@ -178,13 +173,13 @@ void	small_sort(t_stack stacks, int len_a, int len_b)
 		swap(stacks, 'a');
 	else if ((first < second) && (second > third))
 	{
-		len_b++;
-		push(stacks, 'b', len_a, len_b);
-		len_a--;
-		swap(stacks, 'a');
-		len_a++;
-		push(stacks, 'a', len_a, len_b);
-		len_b--;
+		if (third > first)
+		{
+			reverse_rotate(stacks, 'a', len_a, 0);
+			swap(stacks, 'a');
+		}
+		else
+			reverse_rotate(stacks, 'a', len_a, 0);
 	}
 	else if ((first > second) && (second < third))
 		swap(stacks, 'a');

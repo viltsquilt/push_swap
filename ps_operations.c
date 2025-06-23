@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/29 15:02:30 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/18 11:32:00 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:21:10 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ void	push_operation(t_stack stacks, int type, int len_a, int len_b)
 		reverse_rotate_operation(stacks, 2, len_b);
 		stacks.list_b[i] = temp;
 		rotate_operation(stacks, 1, len_a);
-//		len_a--;
 	}
 	else
 	{
@@ -32,7 +31,6 @@ void	push_operation(t_stack stacks, int type, int len_a, int len_b)
 		reverse_rotate_operation(stacks, 1, len_a);
 		stacks.list_a[i] = temp;
 		rotate_operation(stacks, 2, len_b);
-//		len_b--;
 	}
 }
 
@@ -68,7 +66,6 @@ void	rotate_operation(t_stack stacks, int type, int len)
 	if (type == 1)
 	{
 		temp = stacks.list_a[i];
-//		while (stacks.list_a[i + 1] < len)
 		while ((i + 1) < len)
 		{
 			stacks.list_a[i] = stacks.list_a[i + 1];
@@ -79,7 +76,6 @@ void	rotate_operation(t_stack stacks, int type, int len)
 	else
 	{
 		temp = stacks.list_b[i];
-//		while (stacks.list_b[i + 1] < len)
 		while ((i + 1) < len)
 		{
 			stacks.list_b[i] = stacks.list_b[i + 1];
@@ -98,7 +94,6 @@ void	reverse_rotate_operation(t_stack stacks, int type, int len)
 	if (type == 1)
 	{
 		temp = stacks.list_a[i];
-//		while (stacks.list_a[len - 1] > 0)
 		while ((i - 1) >= 0)
 		{
 			stacks.list_a[i] = stacks.list_a[i - 1];
@@ -109,7 +104,6 @@ void	reverse_rotate_operation(t_stack stacks, int type, int len)
 	else
 	{
 		temp = stacks.list_b[i];
-//		while (stacks.list_b[len - 1] > 0)
 		while ((i - 1) >= 0)
 		{
 			stacks.list_b[i] = stacks.list_b[i - 1];

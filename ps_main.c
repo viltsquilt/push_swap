@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/20 15:41:50 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:20:32 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ int	main(int argc, char **argv)
 			{
 				write(2, "Error\n", 6);
 				free(stacks.list_a);
-//				free(stacks.list_b);
 				ps_free(split);
 				return (1);
 			}
@@ -106,15 +105,9 @@ int	main(int argc, char **argv)
 		stacks.len_a = stacks.size_a;
 		stacks.len_b = 0;
 		if (stacks.len_a == 3)
-			small_sort(stacks, stacks.len_a, stacks.len_b);
+			small_sort(stacks, stacks.len_a);
 		else
 			push_swap(stacks, stacks.len_a, stacks.len_b);
-//	i = 0;
-//	while (i < stacks.len_a)
-//	{
-//		ft_printf("%i\n", stacks.list_a[i]);
-//		i++;
-//	}
 		free(stacks.list_a);
 		free(stacks.list_b);
 	}

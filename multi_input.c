@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:19:48 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/20 15:37:48 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/23 13:12:44 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	multi_input(int ac, char **av)
 	stacks.len_a = stacks.size_a;
 	stacks.len_b = 0;
 	if (stacks.len_a == 3)
-		small_sort(stacks, stacks.len_a, stacks.len_b);
+		small_sort(stacks, stacks.len_a);
 	else
 		push_swap(stacks, stacks.len_a, stacks.len_b);
 	free(stacks.list_a);
