@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/23 13:13:01 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/23 19:08:41 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 
 typedef struct	s_stack
 {
+	int			i;
 	int			*list_a;
 	int			*list_b;
 	int			smallest_a;
@@ -42,15 +43,22 @@ int		main(int argc, char **argv);
 int     ps_atol(char *nptr);
 int		calculate_cost(t_stack stacks, int type, int len);
 int		find_smallest(t_stack stacks, int len);
-int		find_biggest(t_stack stacks, int type, int len);
+int		find_biggest(t_stack stacks, int len);
 int		find_index(t_stack stacks, int num, int type, int len);
-int		find_target(t_stack stacks, int num, int len_a, int len_b);
+int		find_target(t_stack stacks, int num, int len_a);
 int		size(t_stack stacks, int type);
 int		*move_to_top_costs(t_stack stacks, int len_a, int len_b);
 int		find_cheapest(t_stack stacks, int len);
 int		check_isduplicate(int *array, int num);
-void	ps_free(char **array);
 int		multi_input(int ac, char **av);
+void	finish_sorting(t_stack stacks, int len_a);
+void	free_stacks(t_stack stacks);
+void	ps_free(char **array);
+void	determine_moves(t_stack *stacks, int len_a, int len_b);
+void	double_move(t_stack stacks, int type, int len_a, int len_b);
+void	move_same_direction(t_stack stacks, int type, int len_a, int len_b);
+void	move_different_direction(t_stack stacks, int type, int len_a, int len_b);
+void	algorithm_parsing(t_stack *stacks, int num, int len_a, int len_b);
 void	small_sort(t_stack stacks, int len_a);
 void	push_swap(t_stack stacks, int len_a, int len_b);
 void	push(t_stack stacks, char c, int len_a, int len_b);
