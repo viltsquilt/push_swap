@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/23 19:08:26 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 14:46:47 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,7 @@
 void	push_swap(t_stack stacks, int len_a, int len_b)
 {
 	stacks.i = 0;
-	while (len_a > 3)
-	{
-		len_b++;
-		push(stacks, 'b', len_a, len_b);
-		len_a--;
-	}
-	small_sort(stacks, len_a);
+	len_b = push_to_a(&stacks, &len_a, &len_b);
 	stacks.top_cost = malloc((len_b) * sizeof(int));
 	if (!stacks.top_cost)
 		return (free_stacks(stacks));
@@ -100,4 +94,16 @@ void	free_stacks(t_stack stacks)
 	free(stacks.list_a);
 	free(stacks.list_a);
 	return ;
+}
+
+int	push_to_a(t_stack *stacks, int *len_a, int *len_b)
+{
+    while (*len_a > 3)
+    {
+        (*len_b)++;
+        push(*stacks, 'b', *len_a, *len_b);
+        (*len_a)--;
+    }
+	small_sort(*stacks, *len_a);
+	return (*len_b);
 }

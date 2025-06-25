@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/20 14:19:48 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/23 13:12:44 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 15:43:10 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,44 +15,24 @@
 int	multi_input(int ac, char **av)
 {
 	t_stack	stacks;
-	int		i;
-	int		temp;
-
-	i = 1;
+	
+	stacks.i = 1;
 	stacks.size_a = ac - 1;
 	stacks.list_a = malloc((stacks.size_a) * (sizeof(int)));
 	stacks.list_a[0] = 0;
 	if (!stacks.list_a)
-	{
-		write(2, "Error\n", 6);
-		return (1);
-	}
+		return (write(2, "Error\n", 6), 1);
 	stacks.list_b = malloc((stacks.size_a) * (sizeof(int)));
 	if (!stacks.list_b)
+		return (write(2, "Error\n", 6), 1);
+	while (av[stacks.i])
 	{
-		write(2, "Error\n", 6);
-		return (1);
+		stacks.temp = ps_atol(stacks, av[stacks.i]);
+		if ((!stacks.list_a) ||
+			(check_isduplicate(stacks.list_a, stacks.temp) == 1))
+			return (error_handling(stacks, 3));
+		stacks.list_a[stacks.i - 1] = stacks.temp;
+		stacks.i++;
 	}
-	while (av[i])
-	{
-		temp = ps_atol(av[i]);
-		if ((!stacks.list_a) || (check_isduplicate(stacks.list_a, temp) == 1))
-		{
-			write(2, "Error\n", 6);
-			free(stacks.list_a);
-			free(stacks.list_b);
-			return (1);
-		}
-		stacks.list_a[i - 1] = temp;
-		i++;
-	}
-	stacks.len_a = stacks.size_a;
-	stacks.len_b = 0;
-	if (stacks.len_a == 3)
-		small_sort(stacks, stacks.len_a);
-	else
-		push_swap(stacks, stacks.len_a, stacks.len_b);
-	free(stacks.list_a);
-	free(stacks.list_b);
-	return (0);
+	return (send_it (stacks));
 }
