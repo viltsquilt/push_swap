@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 15:36:49 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:57:47 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	ps_free(char **array)
 	int	j;
 
 	j = 0;
-	while(array[j])
+	while (array[j])
 	{
 		free(array[j]);
 		j++;
@@ -66,12 +66,11 @@ int	main(int argc, char **argv)
 		split_and_allocate(&stacks);
 		while (stacks.split[stacks.i] != 0)
 		{
-			stacks.temp  = ps_atol(stacks, stacks.split[stacks.i]);
-			if ((!stacks.list_a) || 
-				(check_isduplicate(stacks.list_a, stacks.temp) == 1))
+			stacks.temp = ps_atol(stacks, stacks.split[stacks.i]);
+			if ((!stacks.list_a)
+				|| (check_isduplicate(stacks.list_a, stacks.temp) == 1))
 				return (error_handling(stacks, 2));
-			stacks.list_a[stacks.i] = stacks.temp;
-			stacks.i++;
+			stacks.list_a[stacks.i++] = stacks.temp;
 		}
 		ps_free(stacks.split);
 		return (send_it(stacks));

@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 15:46:03 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:42:46 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	size(t_stack stacks, int type)
 	return (i);
 }
 
-int error_handling(t_stack stacks, int type)
+int	error_handling(t_stack stacks, int type)
 {
 	if (type == 1)
 	{

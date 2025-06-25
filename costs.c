@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:37 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/23 14:33:24 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:39:05 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	*move_to_top_costs(t_stack stacks, int len_a, int len_b)
 	return (stacks.top_cost);
 }
 
-int calculate_cost(t_stack stacks, int type, int len)
+int	calculate_cost(t_stack stacks, int type, int len)
 {
 	if (type == 1)
 	{

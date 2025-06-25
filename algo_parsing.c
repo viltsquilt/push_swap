@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 15:52:04 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/25 19:37:19 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ void	algorithm_parsing(t_stack *stacks, int num, int len_a, int len_b)
 void	determine_moves(t_stack *stacks, int len_a, int len_b)
 {
 	if (((stacks->cost_a == stacks->index_a)
-		&& (stacks->cost_b == stacks->index_b))
+			&& (stacks->cost_b == stacks->index_b))
 		&& (stacks->index_a == stacks->index_b))
 		double_move(*stacks, 1, len_a, len_b);
 	else if (((stacks->cost_a != stacks->index_a)
-		&& (stacks->cost_b != stacks->index_b))
+			&& (stacks->cost_b != stacks->index_b))
 		&& (stacks->cost_b == stacks->cost_a))
 		double_move(*stacks, 2, len_a, len_b);
 	else if ((stacks->cost_a == stacks->index_a)
