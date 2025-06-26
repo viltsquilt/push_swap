@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 19:37:19 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/26 13:48:18 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	determine_moves(t_stack *stacks, int len_a, int len_b)
 		move_same_direction(*stacks, 2, len_a, len_b);
 	else if ((stacks->cost_a == stacks->index_a)
 		&& (stacks->cost_b != stacks->index_b))
-		move_different_direction(*stacks, 1, len_a, len_b);
+		move_diff_direction(*stacks, 1, len_a, len_b);
 	else
-		move_different_direction(*stacks, 2, len_a, len_b);
+		move_diff_direction(*stacks, 2, len_a, len_b);
 }
 
 void	double_move(t_stack stacks, int type, int len_a, int len_b)
@@ -99,7 +99,7 @@ void	move_same_direction(t_stack stacks, int type, int len_a, int len_b)
 	}
 }
 
-void	move_different_direction(t_stack stacks, int type, int len_a, int len_b)
+void	move_diff_direction(t_stack stacks, int type, int len_a, int len_b)
 {
 	if (type == 1)
 	{
