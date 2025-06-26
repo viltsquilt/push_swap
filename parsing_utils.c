@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 19:42:46 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:49:15 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,24 +41,6 @@ int	ps_atol(t_stack stacks, char *nptr)
 	return (stacks.nb);
 }
 
-int	size(t_stack stacks, int type)
-{
-	int	i;
-
-	i = 0;
-	if (type == 1)
-	{
-		while (stacks.list_a[i])
-			i++;
-	}
-	else
-	{
-		while (stacks.list_b[i])
-			i++;
-	}
-	return (i);
-}
-
 int	error_handling(t_stack stacks, int type)
 {
 	if (type == 1)
@@ -73,11 +55,17 @@ int	error_handling(t_stack stacks, int type)
 		free(stacks.list_b);
 		ps_free(stacks.split);
 	}
-	else
+	else if (type == 3)
 	{
 		write(2, "Error\n", 6);
 		free(stacks.list_a);
 		free(stacks.list_b);
+	}
+	else
+	{
+		free(stacks.list_a);
+		free(stacks.list_b);
+		exit (1);
 	}
 	return (1);
 }

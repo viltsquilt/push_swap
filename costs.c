@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/18 12:53:37 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 19:39:05 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:12:59 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,4 +62,18 @@ int	calculate_cost(t_stack stacks, int type, int len)
 		else
 			return (len - stacks.index_b);
 	}
+}
+
+int	issorted(t_stack stacks, int len_a)
+{
+	int	i;
+
+	i = 0;
+	while (i < len_a - 1)
+	{
+		if (stacks.list_a[i] > stacks.list_a[i + 1])
+			return (0);
+		i++;
+	}
+	return (1);
 }

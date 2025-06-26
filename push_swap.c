@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 14:00:58 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 19:43:51 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/26 12:12:20 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 void	push_swap(t_stack stacks, int len_a, int len_b)
 {
 	stacks.i = 0;
+	if (issorted(stacks, len_a))
+		error_handling(stacks, 4);
 	len_b = push_to_a(&stacks, &len_a, &len_b);
 	stacks.top_cost = malloc((len_b) * sizeof(int));
 	if (!stacks.top_cost)

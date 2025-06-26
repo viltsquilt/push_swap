@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/25 15:40:22 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/06/26 13:03:44 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct	s_stack
 {
-	int			i;
+	size_t			i;
 	int			errorflag;
 	int			minusflag;
 	int			temp;
@@ -52,14 +52,14 @@ int		find_smallest(t_stack stacks, int len);
 int		find_biggest(t_stack stacks, int len);
 int		find_index(t_stack stacks, int num, int type, int len);
 int		find_target(t_stack stacks, int num, int len_a);
-int		size(t_stack stacks, int type);
 int		*move_to_top_costs(t_stack stacks, int len_a, int len_b);
 int		find_cheapest(t_stack stacks, int len);
 int		error_handling(t_stack stacks, int type);
-int		check_isduplicate(int *array, int num);
+int		check_isduplicate(t_stack stacks);
 int		multi_input(int ac, char **av);
 int		split_and_allocate(t_stack *stacks);
 int		send_it(t_stack stacks);
+int		issorted(t_stack stacks, int len_a);
 void	finish_sorting(t_stack stacks, int len_a);
 void	free_stacks(t_stack stacks);
 void	ps_free(char **array);
