@@ -6,13 +6,13 @@
 #    By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 10:57:31 by vahdekiv          #+#    #+#              #
-#    Updated: 2025/06/25 13:49:57 by vahdekiv         ###   ########.fr        #
+#    Updated: 2025/06/26 13:27:28 by vahdekiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -g -I libft/
+CFLAGS = -Wall -Wextra -Werror -I libft/
 SRCS = push_swap.c ps_command_call.c  parsing_utils.c ps_operations.c \
 		main.c targeting.c costs.c multi_input.c algo_parsing.c \
 
