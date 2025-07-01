@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/26 12:49:15 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:02:10 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,24 +18,33 @@ int	ps_atol(t_stack stacks, char *nptr)
 	int	i;
 
 	i = 0;
+	stacks.minuscount = 0;
+	stacks.pluscount = 0;
 	stacks.minusflag = 1;
 	stacks.nb = 0;
 	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
 		i++;
-	if (nptr[i] == '-' || nptr[i] == '+')
-		if (nptr[i++] == '-')
-			stacks.minusflag = -1;
-	stacks.errorflag = i;
+	while (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			stacks.minuscount++;
+		if (nptr[i] == '+')
+			stacks.pluscount++;
+		i++;
+	}
+	if ((stacks.minuscount % 2 != 0) && (stacks.minuscount > stacks.pluscount))
+		stacks.minusflag = -1;
+//	stacks.errorflag = i;
 	while (nptr[i] >= '0' && nptr[i] <= '9')
 		stacks.nb = stacks.nb * 10 + (nptr[i++] - '0');
-	if ((i - stacks.errorflag) > 12)
-	{
-		error_handling(stacks, 1);
-		exit (1);
-	}
+//	if ((i - stacks.errorflag) > 12)
+//	{
+//		error_handling(stacks, 1);
+//		exit (1);
+//	}
 	stacks.nb *= stacks.minusflag;
-	if (stacks.nb > INT_MAX || stacks.nb < INT_MIN)
-		exit (1);
+//	if (stacks.nb > INT_MAX || stacks.nb < INT_MIN)
+//		exit (1);
 	if (nptr[i] == '\0')
 		return (stacks.nb);
 	return (stacks.nb);

@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/06/30 14:02:13 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/01 13:10:46 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,8 @@
 ./push_swap ""
 ./push_swap " "
 ./push_swap "1 s"
-./push_swap 1 --------------5 4;
-./push_swap 1 +-5 4
 ./push_swap 2147483648
 ./push_swap -2147483649
-./push_swap 1 2 1
-./push_swap <-- should not print Error
 ./push_swap "7 0 1" 2 
 stacks.list_b = NULL; //malloc((stacks.size_a) * (sizeof(int))); leaking,
 ./push_swap 6 2 3 5 stacks->list_a = NULL; //malloc((stacks->size_a) * (sizeof(int))); segfault,
@@ -41,6 +37,8 @@ typedef struct s_stack
 	size_t		size_b;
 	int			errorflag;
 	int			minusflag;
+	int			minuscount;
+	int			pluscount;
 	int			temp;
 	int			*list_a;
 	int			*list_b;
@@ -101,6 +99,7 @@ int		check_isduplicate(t_stack stacks);
 int		multi_input(int ac, char **av);
 int		ps_arraylen(char **split);
 int		main(int argc, char **argv);
+int		minuscount(char *nptr);
 void	ps_free(char **array);
 
 // calls to operations and operations
