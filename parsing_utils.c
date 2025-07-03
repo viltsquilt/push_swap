@@ -6,14 +6,14 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/01 13:02:10 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:42:20 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
-
-int	ps_atol(t_stack stacks, char *nptr)
+/*
+int	ps_atoi(t_stack stacks, char *nptr)
 {
 	int	i;
 
@@ -49,34 +49,72 @@ int	ps_atol(t_stack stacks, char *nptr)
 		return (stacks.nb);
 	return (stacks.nb);
 }
+*/
 
-int	error_handling(t_stack stacks, int type)
+static long long	ps_atoi(t_stack stacks, char *nptr)
 {
-	if (type == 1)
+	size_t	i;
+	int		sign;
+
+	i = 0;
+	sign = 1;
+	stacks.n = 0;
+	if (nptr[i] == '-')
 	{
-		write(2, "Error\n", 6);
-		ps_free(stacks.split);
+		sign *= -1;
+		i++;
 	}
-	else if (type == 2)
+	while (nptr[i])
 	{
-		write(2, "Error\n", 6);
-		free(stacks.list_a);
-		free(stacks.list_b);
-		ps_free(stacks.split);
+		stacks.n = stacks.n * 10 + (nptr[i] - '0');
+		i++;
 	}
-	else if (type == 3)
+	stacks.n = stacks.n * sign;
+	return (stacks.n);
+}
+
+int	check_input(t_stack stacks, char **av)
+{
+	if (av[1][0] == '\0' || ft_isspace(av[1]) == 1)
+		return (write(2, "Error\n", 6), 1);
+	stacks.split = ft_split(av[1], ' ');
+	if (!stacks.split)
+		return (write(2, "Error\n", 6), 1);
+	split_and_allocate(&stacks);
+	while (stacks.split[stacks.i] != 0)
 	{
-		write(2, "Error\n", 6);
-		free(stacks.list_a);
-		free(stacks.list_b);
+		stacks.temp = ps_atoi(stacks, stacks.split[stacks.i]);
+		if (stacks.temp > INT_MAX || stacks.temp < INT_MIN)
+			return (error_handling(stacks, 2));
+		stacks.list_a[stacks.i++] = (int)stacks.temp;
 	}
-	else
+	if (check_isduplicate(stacks) == 1)
+		return (error_handling(stacks, 2));
+	ps_free(stacks.split);
+	return (send_it(stacks));
+}
+
+int	check_multi_input(t_stack stacks, char **av)
+{
+	if (multi_input_isspace(av) == 1)
+		return (write(2, "Error\n", 6), 1);
+	stacks.list_a = malloc((stacks.size_a) * (sizeof(int)));
+	if (!stacks.list_a)
+		return (write(2, "Error\n", 6), 1);
+	stacks.list_b = malloc((stacks.size_a) * (sizeof(int)));
+	if (!stacks.list_b)
+		return (write(2, "Error\n", 6), 1);
+	while (stacks.i < stacks.size_a)
 	{
-		free(stacks.list_a);
-		free(stacks.list_b);
-		exit (1);
+		stacks.temp = ps_atoi(stacks, av[stacks.i]);
+		if (stacks.temp > INT_MAX || stacks.temp < INT_MIN)
+			return (error_handling(stacks, 3));
+		stacks.list_a[stacks.i] = (int)stacks.temp;
+		stacks.i++;
 	}
-	return (1);
+	if (check_isduplicate(stacks) == 1)
+		return (error_handling(stacks, 3));
+	return (send_it (stacks));
 }
 
 int	send_it(t_stack stacks)

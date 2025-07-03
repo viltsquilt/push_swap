@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/01 13:10:46 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:42:37 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,14 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 # include "libft/libft.h"
 
 /*
-./push_swap ""
-./push_swap " "
-./push_swap "1 s"
+./push_swap "" fixed but should write "error" or not?
+./push_swap " " same as above
 ./push_swap 2147483648
 ./push_swap -2147483649
-./push_swap "7 0 1" 2 
 stacks.list_b = NULL; //malloc((stacks.size_a) * (sizeof(int))); leaking,
 ./push_swap 6 2 3 5 stacks->list_a = NULL; //malloc((stacks->size_a) * (sizeof(int))); segfault,
 ./push_swap "6 2 3 5" stacks->list_b = NULL; //malloc((stacks->size_a) * (sizeof(int))); segfault,
@@ -33,13 +32,13 @@ stacks.list_b = NULL; //malloc((stacks.size_a) * (sizeof(int))); leaking,
 typedef struct s_stack
 {
 	size_t		i;
+	size_t		j;
 	size_t		size_a;
 	size_t		size_b;
 	int			errorflag;
 	int			minusflag;
 	int			minuscount;
 	int			pluscount;
-	int			temp;
 	int			*list_a;
 	int			*list_b;
 	int			smallest_a;
@@ -55,7 +54,8 @@ typedef struct s_stack
 	int			total;
 	int			len_a;
 	int			len_b;
-	long		nb;
+	long long	temp;
+	long long	n;
 	char		**split;
 }	t_stack;
 
@@ -91,7 +91,6 @@ int		issorted(t_stack stacks, int len_a);
 
 // main and input parsing
 
-int		ps_atol(t_stack stacks, char *nptr);
 int		error_handling(t_stack stacks, int type);
 int		split_and_allocate(t_stack *stacks);
 int		send_it(t_stack stacks);
@@ -100,6 +99,10 @@ int		multi_input(int ac, char **av);
 int		ps_arraylen(char **split);
 int		main(int argc, char **argv);
 int		minuscount(char *nptr);
+int		ft_isspace(char *s);
+int		multi_input_isspace(char **s);
+int		check_input(t_stack stacks, char **av);
+int		check_multi_input(t_stack stacks, char **av);
 void	ps_free(char **array);
 
 // calls to operations and operations

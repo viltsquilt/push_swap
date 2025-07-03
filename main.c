@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/28 10:58:35 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/01 13:19:59 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/03 16:41:29 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ int	multi_input(int ac, char **av)
 
 	stacks.i = 0;
 	stacks.size_a = ac - 1;
+	return (check_multi_input(stacks, av));
+/*	if (multi_input_isspace(av) == 1)
+		return (write(2, "Error\n", 6), 1);
 	stacks.list_a = malloc((stacks.size_a) * (sizeof(int)));
 	if (!stacks.list_a)
 		return (write(2, "Error\n", 6), 1);
@@ -74,15 +77,16 @@ int	multi_input(int ac, char **av)
 		return (write(2, "Error\n", 6), 1);
 	while (stacks.i < stacks.size_a)
 	{
-		stacks.temp = ps_atol(stacks, av[stacks.i]);
-		if (!stacks.temp)
+		stacks.temp = ps_atoi(stacks, av[stacks.i]);
+		if (stacks.temp > INT_MAX || stacks.temp < INT_MIN)
 			return (error_handling(stacks, 3));
-		stacks.list_a[stacks.i] = stacks.temp;
+		stacks.list_a[stacks.i] = (int)stacks.temp;
 		stacks.i++;
 	}
 	if (check_isduplicate(stacks) == 1)
 		return (error_handling(stacks, 3));
 	return (send_it (stacks));
+	return (0);*/
 }
 
 int	main(int argc, char **argv)
@@ -96,18 +100,24 @@ int	main(int argc, char **argv)
 		multi_input(argc, &argv[1]);
 	else
 	{
+		return (check_input(stacks, argv));
+		/*if (argv[1][0] == '\0' || ft_isspace(argv[1]) == 1)
+			return (write(2, "Error\n", 6), 1);
 		stacks.split = ft_split(argv[1], ' ');
 		if (!stacks.split)
 			return (write(2, "Error\n", 6), 1);
 		split_and_allocate(&stacks);
 		while (stacks.split[stacks.i] != 0)
 		{
-			stacks.temp = ps_atol(stacks, stacks.split[stacks.i]);
-			stacks.list_a[stacks.i++] = stacks.temp;
+			stacks.temp = ps_atoi(stacks, stacks.split[stacks.i]);
+			if (stacks.temp > INT_MAX || stacks.temp < INT_MIN)
+				return (error_handling(stacks, 2));
+			stacks.list_a[stacks.i++] = (int)stacks.temp;
 		}
 		if (check_isduplicate(stacks) == 1)
 			return (error_handling(stacks, 2));
 		ps_free(stacks.split);
-		return (send_it(stacks));
+		return (send_it(stacks));*/
 	}
+	return (0);
 }

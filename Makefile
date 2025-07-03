@@ -6,15 +6,15 @@
 #    By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/06 10:57:31 by vahdekiv          #+#    #+#              #
-#    Updated: 2025/06/26 14:01:11 by vahdekiv         ###   ########.fr        #
+#    Updated: 2025/07/03 13:21:17 by vahdekiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = push_swap
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I libft/
+CFLAGS = -Wall -Wextra -Werror -I libft/ -g
 SRCS = push_swap.c ps_command_call.c  parsing_utils.c ps_operations.c \
-		main.c targeting.c costs.c algo_parsing.c
+		main.c targeting.c costs.c algo_parsing.c error_handling.c
 
 OBJS = $(SRCS:.c=.o)
 
