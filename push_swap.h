@@ -6,7 +6,7 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/05/27 13:56:13 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/03 16:42:37 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/04 12:34:17 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,6 @@
 # include <unistd.h>
 # include <limits.h>
 # include "libft/libft.h"
-
-/*
-./push_swap "" fixed but should write "error" or not?
-./push_swap " " same as above
-./push_swap 2147483648
-./push_swap -2147483649
-stacks.list_b = NULL; //malloc((stacks.size_a) * (sizeof(int))); leaking,
-./push_swap 6 2 3 5 stacks->list_a = NULL; //malloc((stacks->size_a) * (sizeof(int))); segfault,
-./push_swap "6 2 3 5" stacks->list_b = NULL; //malloc((stacks->size_a) * (sizeof(int))); segfault,
-./push_swap "6 2 3 5" stacks.top_cost = NULL; //malloc((len_b) * sizeof(int)); invalid free
-*/
 
 typedef struct s_stack
 {
@@ -63,7 +52,7 @@ typedef struct s_stack
 
 int		push_to_a(t_stack *stacks, int *len_a, int *len_b);
 void	finish_sorting(t_stack stacks, int len_a);
-void	free_stacks(t_stack stacks);
+//void	free_stacks(t_stack stacks);
 void	small_sort(t_stack stacks, int len_a);
 void	push_swap(t_stack stacks, int len_a, int len_b);
 
@@ -100,6 +89,7 @@ int		ps_arraylen(char **split);
 int		main(int argc, char **argv);
 int		minuscount(char *nptr);
 int		ft_isspace(char *s);
+int		sorted(t_stack stacks);
 int		multi_input_isspace(char **s);
 int		check_input(t_stack stacks, char **av);
 int		check_multi_input(t_stack stacks, char **av);

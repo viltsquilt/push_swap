@@ -6,50 +6,12 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/03 16:42:20 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/04 13:30:31 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 #include <limits.h>
-/*
-int	ps_atoi(t_stack stacks, char *nptr)
-{
-	int	i;
-
-	i = 0;
-	stacks.minuscount = 0;
-	stacks.pluscount = 0;
-	stacks.minusflag = 1;
-	stacks.nb = 0;
-	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == 32)
-		i++;
-	while (nptr[i] == '-' || nptr[i] == '+')
-	{
-		if (nptr[i] == '-')
-			stacks.minuscount++;
-		if (nptr[i] == '+')
-			stacks.pluscount++;
-		i++;
-	}
-	if ((stacks.minuscount % 2 != 0) && (stacks.minuscount > stacks.pluscount))
-		stacks.minusflag = -1;
-//	stacks.errorflag = i;
-	while (nptr[i] >= '0' && nptr[i] <= '9')
-		stacks.nb = stacks.nb * 10 + (nptr[i++] - '0');
-//	if ((i - stacks.errorflag) > 12)
-//	{
-//		error_handling(stacks, 1);
-//		exit (1);
-//	}
-	stacks.nb *= stacks.minusflag;
-//	if (stacks.nb > INT_MAX || stacks.nb < INT_MIN)
-//		exit (1);
-	if (nptr[i] == '\0')
-		return (stacks.nb);
-	return (stacks.nb);
-}
-*/
 
 static long long	ps_atoi(t_stack stacks, char *nptr)
 {
@@ -103,7 +65,10 @@ int	check_multi_input(t_stack stacks, char **av)
 		return (write(2, "Error\n", 6), 1);
 	stacks.list_b = malloc((stacks.size_a) * (sizeof(int)));
 	if (!stacks.list_b)
+	{
+		free(stacks.list_a);
 		return (write(2, "Error\n", 6), 1);
+	}
 	while (stacks.i < stacks.size_a)
 	{
 		stacks.temp = ps_atoi(stacks, av[stacks.i]);
@@ -138,6 +103,9 @@ int	split_and_allocate(t_stack *stacks)
 		return (error_handling(*stacks, 1));
 	stacks->list_b = malloc((stacks->size_a) * (sizeof(int)));
 	if (!stacks->list_b)
+	{
+		free(stacks->list_a);
 		return (error_handling(*stacks, 1));
+	}
 	return (0);
 }
