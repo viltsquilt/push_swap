@@ -6,12 +6,11 @@
 /*   By: vahdekiv <vahdekiv@student.hive.fi>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/18 11:07:00 by vahdekiv          #+#    #+#             */
-/*   Updated: 2025/07/04 13:30:31 by vahdekiv         ###   ########.fr       */
+/*   Updated: 2025/07/07 17:41:46 by vahdekiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
 
 static long long	ps_atoi(t_stack stacks, char *nptr)
 {
